@@ -6,7 +6,7 @@
 * Last Update: 2023/05/19
 */
 
-#include "main.h"
+#include "Game.h"
 
 int main() {
 	Game game;
