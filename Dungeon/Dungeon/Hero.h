@@ -1,0 +1,74 @@
+﻿#pragma once
+#include <string>
+
+#include "Position.h"
+
+//************************************************************
+// Hero Class, only has requirement part for example
+//************************************************************
+
+class Hero {
+
+private:
+	Position sPos;	// Hero location
+	char sIcon;		// Hero icon
+	int	hp;			// Life
+	int	sLevel;     // Level
+	int	sMaxExp;	// Level update experience
+	int	sCurrentExp;// current exp hero has
+
+public:
+	// Default constructor
+	Hero();
+	// Setting constructor
+	Hero(int x, int y, int level, int maxExp, int currentExp, char icon, int hp);
+
+	// Setting constructor
+	Hero(Position& pos, int level, int maxExp, int currentExp, char icon, int hp);
+
+	// Set position
+	void setPos(Position pos);
+	void setPos(int x, int y);
+
+	// Set icon
+	void setIcon(char& icon);
+
+	// Set level
+	void setLevel(int level);
+
+	// Set exp
+	void setExp(int exp);
+
+	// Set MaxExp
+	void SetMaxExp(int maxexp);
+
+	// Get position
+	Position getPos(void);
+
+	// Get Icon
+	char getIcon(void);
+
+	// Get level
+	int getLevel(void);
+
+	// Get Exp
+	int getExp(void);
+
+	// Get Max
+	int getMaxExp(void);
+
+	// Get hp
+	int getHP() const;
+
+	//Set hp
+	void setHP(int hp);
+
+	// Incrementally move the elements 
+	void move(Position delta, char** board);
+
+	// Calculate Gain of EXP
+	void gainEXP(int points);
+
+	// Calculate how much damage should be casted
+	void damage(int points);
+};

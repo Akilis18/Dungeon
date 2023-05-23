@@ -21,7 +21,19 @@
     <ClCompile Include="Game.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
     <ClCompile Include="Position.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Bug.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,10 +41,19 @@
     <ClInclude Include="Game.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
+    <ClInclude Include="Hero.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Creature.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Position.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Bug.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
