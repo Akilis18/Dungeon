@@ -25,6 +25,7 @@ Position Creature::getPos(void) { return this->sPos; }
 // Get Icon
 char Creature::getIcon(void) { return this->sIcon; }
 
+//set update function as virtual because console output should be revised
 void Creature::update(Hero& hero, char** board) {
 	Position hPos = hero.getPos();
 

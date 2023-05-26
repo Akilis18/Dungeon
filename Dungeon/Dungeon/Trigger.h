@@ -3,60 +3,42 @@
 #include <string>
 #include <iostream>
 
+#include "Item.h"
 #include "Position.h"
 #include "Hero.h"
 
-class Trigger {
-private:
-	Position tPos;
-	char tIcon;
-	int tExp;
-
+class Trigger : public Item {
 public:
-	//Intent: Default constructor
-	//Pre: None
-	//Post: members assigned
-	Trigger() : tExp(10) {
+	Trigger() : Item() {
+		tExp = 10;
 		tIcon = 'T';
 	}
 
-	//Intent: Constructor
-	//Pre: coordinate value
-	//Post: members assigned
-	Trigger(int x, int y) : tExp(10) {
-		tPos.x = x;
-		tPos.y = y;
-		tIcon = 'T';
-	}
-
-	//Intent: Constructor
-	//Pre: Trigger reference
-	//Post: members assigned
 	Trigger(const Trigger& ref);
 
 	//Intent: Update Hero's info
 	//Pre: Hero object
 	//Post: Hero's info 
-	void update(Hero& hero) const;
+	void update(Hero& hero) const override;
 
 	//Intent: Set Position
 	//Pre: Position or its coordinates
 	//Post: Position assigned
-	void setPos(const Position& pos);
-	void setPos(int x, int y);
+	void setPos(const Position& pos) override;
+	void setPos(int x, int y) override;
 
 	//Intent: Get position
 	//Pre: None
 	//Post: A const Position
-	Position getPos() const;
+	Position getPos() const override;
 
 	//Intent: Get Icon
 	//Pre: None
 	//Post: icon as const char
-	char getIcon() const;
+	char getIcon() const override;
 
 	//Intent: Get reward value
 	//Pre: None
 	//Post: tExp as const int
-	int getExpAmount() const;
+	int getExpAmount() const override;
 };

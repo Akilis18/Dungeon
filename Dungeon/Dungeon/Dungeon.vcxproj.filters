@@ -36,6 +36,12 @@
     <ClCompile Include="Bug.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
+    <ClCompile Include="Snare.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
+    <ClCompile Include="Replenish.cpp">
+      <Filter>來源檔案</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -54,6 +60,15 @@
       <Filter>標頭檔</Filter>
     </ClInclude>
     <ClInclude Include="Bug.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Snare.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Replenish.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>

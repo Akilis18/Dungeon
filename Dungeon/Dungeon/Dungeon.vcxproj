@@ -133,6 +133,8 @@
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Position.cpp" />
+    <ClCompile Include="Replenish.cpp" />
+    <ClCompile Include="Snare.cpp" />
     <ClCompile Include="Trigger.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +142,10 @@
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hero.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="Replenish.h" />
+    <ClInclude Include="Snare.h" />
     <ClInclude Include="Trigger.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

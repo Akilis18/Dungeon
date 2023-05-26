@@ -104,8 +104,38 @@ void Hero::gainEXP(int points) {
 	}
 }
 
+// Calculate Loss of EXP
+void Hero::loseEXP(int points) {
+	int number = -1 * points;
+	if (sLevel == 1 && sCurrentExp - number <= 0) {
+		sCurrentExp = 0;
+		return;
+	}
+
+	while (number > 0) {
+		if (sCurrentExp - number <= 0) {//level down
+			sLevel--;
+			number -= sCurrentExp;
+			sMaxExp = ceil((float)sMaxExp / 1.2f);
+			sCurrentExp = sMaxExp;
+		}
+		else {
+			sCurrentExp -= number;
+			number = 0;
+		}
+	}
+}
+
+void Hero::gainHP(int points) {
+	hp = hp + points;
+	if (hp > 100) {
+		hp = 100;
+	}
+}
+
 void Hero::damage(int points) {
 	hp = hp - points;
-	if (hp < 0)
+	if (hp < 0) {
 		hp = 0;
+	}
 }

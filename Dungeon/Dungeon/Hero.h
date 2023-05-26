@@ -69,6 +69,12 @@ public:
 	// Calculate Gain of EXP
 	void gainEXP(int points);
 
+	// Calculate Loss of Exp
+	void loseEXP(int points);
+
+	// Calculate how much hp should be restored
+	void gainHP(int points);
+
 	// Calculate how much damage should be casted
 	void damage(int points);
 };

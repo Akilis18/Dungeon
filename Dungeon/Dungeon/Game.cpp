@@ -3,7 +3,7 @@
 void Game::mainFlow() {
 	srand(time(NULL));
 
-	// 用來管理鍵盤輸入狀態的陣列
+	// keyboard state management
 	bool gKeyState[ValidInput::INVALID];
 	for (int i = 0; i < ValidInput::INVALID; i++) {
 		gKeyState[i] = false;
@@ -26,7 +26,7 @@ void Game::mainFlow() {
 	// Setup a clear dungeon
 	setupBoard(GHEIGHT, GWIDTH);
 
-	// Draw the bord and information
+	// Draw the board and information
 	draw();
 	drawInfo();
 
@@ -137,13 +137,14 @@ void Game::update(bool key[]) {
 		gHero.move(delta, gBoard);
 	}
 
-	// Manipulate update of two triggers using while loop
-
-	for (int i = 0; i < gTriggers.size(); i++) {
-		gTriggers[i]->update(gHero);
+	// Manipulate update of two items using while loop
+	for (int i = 0; i < gItems.size(); i++) {
+		gItems[i]->update(gHero);
 	}
 
-	gCreature.update(gHero, gBoard);
+	for (int i = 0; i < gCreatures.size(); i++) {
+		gCreatures[i]->update(gHero, gBoard);
+	}
 
 	draw();
 	drawInfo();
@@ -195,16 +196,16 @@ void Game::setupBoard(int rowN, int colN) {
 	validFlags[hPos.y][hPos.x] = false;
 	gHero.setPos(hPos);
 
-	Position cPos = getValidRandomPos();
-	validFlags[cPos.y][cPos.x] = false;
-	gCreature.setPos(cPos);
+	for (int i = 0; i < gCreatures.size(); i++) {
+		Position cPos = getValidRandomPos();
+		validFlags[cPos.y][cPos.x] = false;
+		gCreatures[i]->setPos(cPos);
+	}
 
-	for (int i = 0; i < 2; i++) {
-		Trigger* trigger = new Trigger();
+	for (int i = 0; i < gItems.size(); i++) {
 		Position tPos = getValidRandomPos();
 		validFlags[tPos.y][tPos.x] = false;
-		trigger->setPos(tPos);
-		gTriggers.push_back(trigger);
+		gItems[i]->setPos(tPos);
 	}
 }
 
@@ -221,15 +222,16 @@ void Game::draw() {
 		}
 	}
 
-	// Draw two triggers using for loop on drawBoard
-
-	for (int i = 0; i < gTriggers.size(); i++) {
-		Position t = gTriggers[i]->getPos();
-		drawBoard[t.y][t.x] = gTriggers[i]->getIcon();
+	// Draw two items using for loop on drawBoard
+	for (int i = 0; i < gItems.size(); i++) {
+		Position t = gItems[i]->getPos();
+		drawBoard[t.y][t.x] = gItems[i]->getIcon();
 	}
 
-	Position c = gCreature.getPos();
-	drawBoard[c.y][c.x] = gCreature.getIcon();
+	for (int i = 0; i < gCreatures.size(); i++) {
+		Position c = gCreatures[i]->getPos();
+		drawBoard[c.y][c.x] = gCreatures[i]->getIcon();
+	}
 
 	// Update the hero information
 	Position h = gHero.getPos();
@@ -274,10 +276,16 @@ void Game::saveMap() {
 	oStream << std::endl;
 
 	oStream << gHero.getPos() << " " << gHero.getHP() << " " << gHero.getLevel() << " " << gHero.getExp() << " " << gHero.getMaxExp() << std::endl;
-	oStream << gCreature.getPos() << std::endl;
-	oStream << gTriggers.size() << std::endl;
-	for (int i = 0; i < gTriggers.size(); i++) {
-		oStream << gTriggers[i]->getPos() << std::endl;
+
+	oStream << gCreatures.size() << std::endl;
+	for (int i = 0; i < gCreatures.size(); i++) {
+		oStream << gCreatures[i]->getIcon() << " " << gCreatures[i]->getPos() << endl;
+	}
+
+	oStream << gItems.size() << std::endl;
+
+	for (int i = 0; i < gItems.size(); i++) {
+		oStream << gItems[i]->getIcon() << " " << gItems[i]->getPos() << std::endl;
 	}
 
 	oStream.close();
@@ -303,9 +311,15 @@ void Game::loadMap() {
 	}
 	delete[] gBoard;
 
-	for (int i = 0; i < gTriggers.size(); i++)
-		delete gTriggers[i];
-	gTriggers.clear();
+	for (int i = 0; i < gCreatures.size(); i++) {
+		delete gCreatures[i];
+	}
+	gCreatures.clear();
+
+	for (int i = 0; i < gItems.size(); i++) {
+		delete gItems[i];
+	}
+	gItems.clear();
 
 	iStream >> GWIDTH >> GHEIGHT;
 
@@ -331,16 +345,48 @@ void Game::loadMap() {
 	gHero.setExp(exp);
 	gHero.SetMaxExp(maxExp);
 
-	iStream >> pos;
-	gCreature.setPos(pos);
+	int creatureN;
+	iStream >> creatureN;
 
-	int triggerN;
-	iStream >> triggerN;
-	for (int i = 0; i < triggerN; i++) {
-		iStream >> pos;
-		Trigger* trigger = new Trigger();
-		trigger->setPos(pos);
-		gTriggers.push_back(trigger);
+	char cIcons; //creatures' icon
+	for (int i = 0; i < creatureN; i++) {
+		iStream >> cIcons >> pos;
+		//Creature
+		if (cIcons == 'C' || cIcons == '!') {
+			Creature* creature = new Creature();
+			creature->setPos(pos);
+			gCreatures.push_back(creature);
+		}
+
+		//Bug
+		if (cIcons == 'B') {
+			Bug* bug = new Bug();
+			bug->setPos(pos);
+			gCreatures.push_back(bug);
+		}
+	}
+
+	int itemN;
+	iStream >> itemN;
+
+	char icons;
+	for (int i = 0; i < itemN; i++) {
+		iStream >> icons >> pos;
+		//Trigger
+		if (icons == 'T') {
+			// Trigger* trigger = new Trigger();
+			Item* trigger = new Trigger();
+			trigger->setPos(pos);
+			gItems.push_back(trigger);
+		}
+
+		//Snare
+		if (icons == 'S') {
+			// Snare* trigger = new Snare();
+			Item* snare = new Snare();
+			snare->setPos(pos);
+			gItems.push_back(snare);
+		}
 	}
 
 	iStream.close();

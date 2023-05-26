@@ -4,4 +4,10 @@
 class Bug : public Creature {
 public:
 	Bug();
+
+	// function overriding
+	void update(Hero& hero, char** board) override;
+	virtual bool canSee(Position cPos, Position hPos, Position& dir) override;
+	virtual bool canMove(int deltaX, int deltaY, char** board) override;
+	virtual void move(int deltaX, int deltaY) override;
 };

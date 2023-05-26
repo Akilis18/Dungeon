@@ -11,7 +11,7 @@ protected:
 	Position	sPos;			// Creature position
 	char sIcon = 'C';			// Creature icon
 	int power;
-	vector<int> validDir;
+	//vector<int> validDir;
 
 public:
 	// Default constructor
@@ -30,12 +30,19 @@ public:
 	// Get Icon
 	char getIcon(void);
 
-	void update(Hero& hero, char** board);
+	//set update function as virtual because console output should be revised
+	virtual void update(Hero& hero, char** board);
 
 	float clip(float n, float minimun, float maximum);
-	bool canSee(Position cPos, Position hPos, Position& dir);
 
-	bool canMove(int deltaX, int deltaY, char** board);
-	// Incrementally move the elements 
-	void move(int deltaX, int deltaY);
+	/* functions that haven't been called in main gameflow yet */
+
+	// Check if the hero is in the creature's sight
+	virtual bool canSee(Position cPos, Position hPos, Position& dir);
+
+	// Check if the creature can move to target coordinate
+	virtual bool canMove(int deltaX, int deltaY, char** board);
+
+	// Incrementally move the elements
+	virtual void move(int deltaX, int deltaY);
 };

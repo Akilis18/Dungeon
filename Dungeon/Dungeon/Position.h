@@ -12,10 +12,7 @@ public:
 	Position(int x, int y) : x(x), y(y) {}
 	Position(const Position& ref);
 
-	/*
-	* check if position valid
-	*/
-	//bool isPositionValid(Position& pos, char** gBoard);
+	//check if position valid
 	bool isPositionValid(char** board);
 
 	// Operator overloading

@@ -12,7 +12,11 @@
 //#include "Board.h"
 #include "Hero.h"
 #include "Creature.h"
+#include "Bug.h"
+#include "Item.h"
+#include "Snare.h"
 #include "Trigger.h"
+#include "Replenish.h"
 #include "Position.h"
 
 using namespace std;
@@ -47,7 +51,7 @@ public:
 	void saveMap();
 	void loadMap();
 
-public:
+private:
 	const double gTimeLog = 0.033;
 
 	//store characters
@@ -62,21 +66,13 @@ public:
 
 	Hero gHero;
 
-	//vector<Creature*> gCreature;
-	Creature gCreature;
+	//Creature gCreature;
+	vector<Creature*> gCreatures = { new Creature(), new Bug() };
 
-	vector<Trigger*> gTriggers;
+	//vector<Trigger*> gTriggers;
+	vector<Item*> gItems = { new Trigger(), new Snare(), new Replenish() };
 
-	/*for (auto it = gCreature.begin(); it != gCreature.end(); it++)
-		if (*it != nullptr)
-			it->.....()
-
-	gTriggers.push_back(new TriggerA(...));
-	for (auto it = gTriggers.begin(); it != gTriggers.end(); it++)
-		if (*it != nullptr)
-			it->.....()*/
-
-			//Enumerate different key state
+	//Enumerate different key state
 	enum ValidInput {
 		EW = 0,
 		ES = 1,

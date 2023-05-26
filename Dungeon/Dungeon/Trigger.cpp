@@ -1,5 +1,4 @@
 ﻿#include "Trigger.h"
-#include "Game.h"
 
 Trigger::Trigger(const Trigger& ref) { *this = ref; }
 

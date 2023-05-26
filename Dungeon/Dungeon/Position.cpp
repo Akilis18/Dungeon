@@ -2,14 +2,6 @@
 
 Position::Position(const Position& ref) { *this = ref; }
 
-//bool Position::isPositionValid(Position& pos, char** gBoard) {
-//	// Check whether it is an empty space
-//	if (gBoard[pos.y][pos.x] != ' ')
-//		return false;
-//
-//	return true;
-//}
-
 bool Position::isPositionValid(char** board) {
 	// Check whether it is an empty space
 	if (board[this->y][this->x] != ' ') {
