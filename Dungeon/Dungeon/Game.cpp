@@ -160,6 +160,43 @@ void Game::update(bool key[]) {
 	drawInfo();
 }
 
+
+//Intent: wall generation
+//Pre: board, starting position, board width & height
+//Post: board generated
+void Game::wallGenerate(char** board, int xStart, int yStart, int width, int height) {
+	if (width < 5 || height < 5) return;
+
+	int xDiv = xStart + rand() % (width - 4) + 2;
+	int yDiv = yStart + rand() % (height - 4) + 2;
+
+	for (int i = 0; i < height; i++)
+		if (i != yDiv) board[yStart + i][xDiv] = WALL;
+	for (int i = 0; i < width; i++)
+		if (i != xDiv) board[yDiv][xStart + i] = WALL;
+
+	int doors[4] = { yStart + 1, yStart + height - 2, xStart + 1, xStart + width - 2 };
+
+	if (yDiv - yStart - 1 > 0)
+		doors[0] = yStart + rand() % (yDiv - yStart - 1) + 1;
+	if (yStart + height - yDiv - 3 > 0)
+		doors[1] = yDiv + 1 + rand() % (yStart + height - yDiv - 3);
+	if (xDiv - xStart - 1 > 0)
+		doors[2] = xStart + rand() % (xDiv - xStart - 1) + 1;
+	if (xStart + width - xDiv - 3 > 0)
+		doors[3] = xDiv + 1 + rand() % (xStart + width - xDiv - 3);
+
+	board[doors[0]][xDiv] = ' '; // Up
+	board[doors[1]][xDiv] = ' '; // Down
+	board[yDiv][doors[2]] = ' '; // Left
+	board[yDiv][doors[3]] = ' '; // Right
+
+	wallGenerate(board, xStart, yStart, xDiv - xStart, yDiv - yStart); // top left
+	wallGenerate(board, xDiv + 1, yStart, width - xDiv + xStart - 1, yDiv - yStart); // top right
+	wallGenerate(board, xStart, yDiv + 1, xDiv - xStart, height - yDiv + yStart - 1); // bottom left
+	wallGenerate(board, xDiv + 1, yDiv + 1, width - xDiv + xStart - 1, height - yDiv + yStart - 1); // bottom right
+}
+
 //Intent: setup the game board
 //Pre: int rowN, int colN
 //Post: game board created
@@ -177,7 +214,7 @@ void Game::setupBoard(int rowN, int colN) {
 	}
 
 	/* Maze Wall Generation */
-
+	wallGenerate(gBoard, 1, 1, colN - 2, rowN - 2);
 	/************************************************************************/
 
 	// Setup for (random) position of all elements and implementation of game board using 2d dynamic array

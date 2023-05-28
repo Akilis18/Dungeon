@@ -48,6 +48,11 @@ public:
 	//Post: Update all characters' states
 	void update(bool key[]);
 
+	//Intent: wall generation
+	//Pre: board, starting position, board width & height
+	//Post: board generated
+	void wallGenerate(char** board, int xStart, int yStart, int width, int height);
+
 	//Intent: setup the game board
 	//Pre: int rowN, int colN
 	//Post: game board created
