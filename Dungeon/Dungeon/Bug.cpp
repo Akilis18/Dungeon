@@ -8,7 +8,9 @@ Bug::Bug() : Creature() {
 	this->power = 2;
 }
 
-
+//Intent: Update the real-time status of bug
+//Pre: The hero and the board
+//Post: None
 void Bug::update(Hero& hero, char** board) {
 	Position hPos = hero.getPos();
 
@@ -27,6 +29,9 @@ void Bug::update(Hero& hero, char** board) {
 	}
 }
 
+//Intent: Check if the hero is in the bug's sight
+//Pre: The hero and the board
+//Post: if the hero is in the bug's sight, return 1
 bool Bug::canSee(Position cPos, Position hPos, Position& dir) {
 	// the dir_x and dir_y value are call-by-refernce
 	dir.x = (int)clip((float)(hPos.x - cPos.x), -1.f, 1.f); // clip the value between -1 ~ 1
@@ -42,6 +47,9 @@ bool Bug::canSee(Position cPos, Position hPos, Position& dir) {
 	return false;
 }
 
+//Intent: Check if the bug can move to target coordinate
+//Pre: The X, Y distance and the board
+//Post: if the bug can move to target coordinate, return 1
 bool Bug::canMove(int deltaX, int deltaY, char** board) {
 	// Implement Creature controls
 	//create a buffer to store the result of trying
@@ -54,7 +62,10 @@ bool Bug::canMove(int deltaX, int deltaY, char** board) {
 	return tryMove.isPositionValid(board);
 }
 
-// Incrementally move the elements 
+
+//Intent: Incrementally move the elements 
+//Pre: The X, Y distance
+//Post: None
 void Bug::move(int deltaX, int deltaY) {
 	this->sPos.x += deltaX;
 	this->sPos.y += deltaY;
