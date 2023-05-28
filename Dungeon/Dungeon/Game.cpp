@@ -1,5 +1,8 @@
 ﻿#include "Game.h"
 
+//Intent: Main game flow
+//Pre: None
+//Post: No return
 void Game::mainFlow() {
 	srand(time(NULL));
 
@@ -61,6 +64,9 @@ void Game::mainFlow() {
 	}
 }
 
+//Intent: Update key state
+//Pre: key managing array
+//Post: update key array
 void Game::keyUpdate(bool key[]) {
 	for (int i = 0; i < ValidInput::INVALID; i++) {
 		key[i] = false;
@@ -96,6 +102,9 @@ void Game::keyUpdate(bool key[]) {
 	}
 }
 
+//Intent: Update all characters' states
+//Pre: key array
+//Post: Update all characters' states
 void Game::update(bool key[]) {
 	// Clear Screen
 	system("CLS");
@@ -151,6 +160,9 @@ void Game::update(bool key[]) {
 	drawInfo();
 }
 
+//Intent: setup the game board
+//Pre: int rowN, int colN
+//Post: game board created
 void Game::setupBoard(int rowN, int colN) {
 	// Allocate & init game board using 2d dynamic array
 	gBoard = new char* [rowN];
@@ -208,6 +220,9 @@ void Game::setupBoard(int rowN, int colN) {
 	}
 }
 
+//Intent: draw the game board
+//Pre: None
+//Post: game board printed on the screen
 void Game::draw() {
 	// Add the hero into the board
 	// Setup and implementation of drawing board using 2d vector
@@ -245,6 +260,9 @@ void Game::draw() {
 	}
 }
 
+//Intent: Draw each character's info
+//Pre: None
+//Post: Info printed on console
 void Game::drawInfo() {
 	std::cout << "The hero is level " << gHero.getLevel() << "(" << gHero.getExp() << "/" << gHero.getMaxExp() << " to level up)" << std::endl;
 	std::cout << "The hero has " << gHero.getHP() << " hp" << std::endl;
@@ -253,6 +271,9 @@ void Game::drawInfo() {
 	std::cout << "(ESC) Exit (1) Save (2) Load" << std::endl;
 }
 
+//Intent: Save current game data
+//Pre: None
+//Post: Game data saved in a text file
 void Game::saveMap() {
 	// Save dungen to file
 	system("CLS");
@@ -290,6 +311,9 @@ void Game::saveMap() {
 	oStream.close();
 }
 
+//Intent: Load game data from file
+//Pre: None
+//Post: Game reset
 void Game::loadMap() {
 	// Load from file and reset the dungen
 	system("CLS");
