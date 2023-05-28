@@ -1,9 +1,13 @@
 ﻿#include "Bug.h"
 
+//Intent: Default constructor
+//Pre: None
+//Post: Members assigned
 Bug::Bug() : Creature() {
 	this->sIcon = 'B';
 	this->power = 2;
 }
+
 
 void Bug::update(Hero& hero, char** board) {
 	Position hPos = hero.getPos();
