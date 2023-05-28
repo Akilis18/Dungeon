@@ -6,7 +6,10 @@
 
 using namespace std;
 
-class Creature {//creature class 
+//************************************************************
+// A creature class
+//************************************************************
+class Creature {
 protected:
 	Position	sPos;			// Creature position
 	char sIcon = 'C';			// Creature icon
@@ -35,7 +38,7 @@ public:
 
 	float clip(float n, float minimun, float maximum);
 
-	/* functions that haven't been called in main gameflow yet */
+	/* Below are the functions that haven't been called in the main gameflow yet */
 
 	// Check if the hero is in the creature's sight
 	virtual bool canSee(Position cPos, Position hPos, Position& dir);

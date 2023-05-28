@@ -1,5 +1,15 @@
 ﻿#include "Trigger.h"
 
+Trigger::Trigger() : Item() {
+	tExp = 10;
+	tIcon = 'T';
+}
+
+Trigger::Trigger(int x, int y) : Item(x, y) {
+	tExp = 10;
+	tIcon = 'T';
+}
+
 Trigger::Trigger(const Trigger& ref) { *this = ref; }
 
 void Trigger::update(Hero& hero) const {

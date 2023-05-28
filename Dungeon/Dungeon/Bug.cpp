@@ -1,6 +1,6 @@
 ﻿#include "Bug.h"
 
-Bug::Bug() {
+Bug::Bug() : Creature() {
 	this->sIcon = 'B';
 	this->power = 2;
 }

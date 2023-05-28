@@ -97,12 +97,12 @@ void Game::keyUpdate(bool key[]) {
 }
 
 void Game::update(bool key[]) {
-	// 清除版面
+	// Clear Screen
 	system("CLS");
 
 	Position delta;
 
-	// 是否有input
+	// Check Input State
 	bool hasInput = false;
 	if (key[ValidInput::EW]) {
 		delta -= Position(0, 1);
@@ -128,8 +128,9 @@ void Game::update(bool key[]) {
 				break;
 			}
 		}
-		if (allInvalid)
+		if (allInvalid) {
 			std::cout << "invalid input\n";
+		}
 	}
 
 
@@ -152,7 +153,6 @@ void Game::update(bool key[]) {
 
 void Game::setupBoard(int rowN, int colN) {
 	// Allocate & init game board using 2d dynamic array
-
 	gBoard = new char* [rowN];
 	for (int i = 0; i < rowN; i++) {
 		gBoard[i] = new char[colN];
@@ -164,13 +164,12 @@ void Game::setupBoard(int rowN, int colN) {
 		}
 	}
 
-	/*Please implement your code here*/
+	/* Maze Wall Generation */
 
 	/************************************************************************/
 
 	// Setup for (random) position of all elements and implementation of game board using 2d dynamic array
 	// Elements has to be randomly generated within canvas
-
 	std::vector<std::vector<bool>> validFlags(GHEIGHT);
 	for (int i = 0; i < GHEIGHT; i++) {
 		validFlags[i].resize(GWIDTH);

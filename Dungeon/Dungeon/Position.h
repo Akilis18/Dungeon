@@ -8,6 +8,9 @@ class Position {
 public:
 	int x, y; // x, y Coordinate
 
+	//Intent: Constructers
+	//Pre: None/ coordinate/ object reference
+	//Post: Members assigned
 	Position() : x(0), y(0) {}
 	Position(int x, int y) : x(x), y(y) {}
 	Position(const Position& ref);

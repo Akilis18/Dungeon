@@ -1,14 +1,24 @@
 ﻿#pragma once
 #include "Item.h"
 
-//A trap object
+//************************************************************
+// A trap class
+//************************************************************
 class Snare : public Item {
 public:
-	Snare() : Item() {
-		tExp = -10;
-		tIcon = 'S';
-	}
+	//Intent: Default constructor
+	//Pre: None
+	//Post: Members assigned
+	Snare();
 
+	//Intent: Constructor
+	//Pre: int x, int y
+	//Post: Members assigned
+	Snare(int x, int y);
+
+	//Intent: Default constructor
+	//Pre: Object reference
+	//Post: Members assigned
 	Snare(const Snare& ref);
 
 	//Intent: Update Hero's info

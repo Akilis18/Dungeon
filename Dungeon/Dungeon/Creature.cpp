@@ -1,5 +1,4 @@
 ﻿#include "Creature.h"
-#include "Game.h"
 
 // Default constructor
 Creature::Creature(void) {

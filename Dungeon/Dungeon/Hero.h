@@ -4,9 +4,8 @@
 #include "Position.h"
 
 //************************************************************
-// Hero Class, only has requirement part for example
+// A Hero class
 //************************************************************
-
 class Hero {
 
 private:
@@ -60,7 +59,7 @@ public:
 	// Get hp
 	int getHP() const;
 
-	//Set hp
+	// Set hp
 	void setHP(int hp);
 
 	// Incrementally move the elements 

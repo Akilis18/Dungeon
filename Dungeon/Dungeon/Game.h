@@ -38,17 +38,39 @@ public:
 	//Post: No return
 	void mainFlow();
 
+	//Intent: Update key state
+	//Pre: key managing array
+	//Post: update key array
 	void keyUpdate(bool key[]);
 
+	//Intent: Update all characters' states
+	//Pre: key array
+	//Post: Update all characters' states
 	void update(bool key[]);
 
+	//Intent: setup the game board
+	//Pre: int rowN, int colN
+	//Post: game board created
 	void setupBoard(int rowN, int colN);
 
+	//Intent: draw the game board
+	//Pre: None
+	//Post: game board printed on the screen
 	void draw();
 
+	//Intent: Draw each character's info
+	//Pre: None
+	//Post: Info printed on console
 	void drawInfo();
 
+	//Intent: Save current game data
+	//Pre: None
+	//Post: Game data saved in a text file
 	void saveMap();
+
+	//Intent: Load game data from file
+	//Pre: None
+	//Post: Game reset
 	void loadMap();
 
 private:
@@ -85,5 +107,6 @@ private:
 		INVALID,
 	};
 
+	//For key state management
 	bool gKeyState[ValidInput::INVALID];
 };

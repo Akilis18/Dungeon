@@ -1,5 +1,4 @@
 ﻿#pragma once
-#pragma once
 #include <string>
 #include <iostream>
 
@@ -7,13 +6,24 @@
 #include "Position.h"
 #include "Hero.h"
 
+//************************************************************
+// A Trigger class
+//************************************************************
 class Trigger : public Item {
 public:
-	Trigger() : Item() {
-		tExp = 10;
-		tIcon = 'T';
-	}
+	//Intent: Default constructor
+	//Pre: None
+	//Post: Members assigned
+	Trigger();
 
+	//Intent: Constructor
+	//Pre: int x, int y
+	//Post: Members assigned
+	Trigger(int x, int y);
+
+	//Intent: Default constructor
+	//Pre: Object reference
+	//Post: Members assigned
 	Trigger(const Trigger& ref);
 
 	//Intent: Update Hero's info

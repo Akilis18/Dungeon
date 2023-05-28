@@ -3,6 +3,9 @@
 
 class Bug : public Creature {
 public:
+	//Intent: Default constructor
+	//Pre: None
+	//Post: Members assigned
 	Bug();
 
 	// function overriding

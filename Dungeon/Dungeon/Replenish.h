@@ -1,13 +1,24 @@
 ﻿#pragma once
 #include "Item.h"
 
+//************************************************************
+// An object that restores hero's HP
+//************************************************************
 class Replenish : public Item {
 public:
-	Replenish() : Item() {
-		tExp = 8;
-		tIcon = 'R';
-	}
+	//Intent: Default constructor
+	//Pre: None
+	//Post: Members assigned
+	Replenish();
 
+	//Intent: Constructor
+	//Pre: int x, int y
+	//Post: Members assigned
+	Replenish(int x, int y);
+
+	//Intent: Default constructor
+	//Pre: Object reference
+	//Post: Members assigned
 	Replenish(const Replenish& ref);
 
 	//Intent: Update Hero's info

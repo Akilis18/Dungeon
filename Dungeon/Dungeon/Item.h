@@ -2,6 +2,9 @@
 #include "Position.h"
 #include "Hero.h"
 
+//************************************************************
+// An Item class (base class)
+//************************************************************
 class Item {
 protected:
 	Position tPos;
@@ -12,17 +15,14 @@ public:
 	//Intent: Default constructor
 	//Pre: None
 	//Post: members assigned
-	Item() : tExp(10) {
-		tIcon = 'I';
-	}
+	Item() {}
 
 	//Intent: Constructor
 	//Pre: coordinate value
 	//Post: members assigned
-	Item(int x, int y) : tExp(10) {
+	Item(int x, int y) {
 		tPos.x = x;
 		tPos.y = y;
-		tIcon = 'I';
 	}
 
 	//Intent: Constructor

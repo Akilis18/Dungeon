@@ -1,5 +1,15 @@
 ﻿#include "Snare.h"
 
+Snare::Snare() : Item() {
+	tExp = -10;
+	tIcon = 'S';
+}
+
+Snare::Snare(int x, int y) : Item(x, y) {
+	tExp = -10;
+	tIcon = 'S';
+}
+
 Snare::Snare(const Snare& ref) { *this = ref; }
 
 void Snare::update(Hero& hero) const {

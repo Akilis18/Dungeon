@@ -1,5 +1,15 @@
 ﻿#include "Replenish.h"
 
+Replenish::Replenish() : Item() {
+	tExp = 8;
+	tIcon = 'R';
+}
+
+Replenish::Replenish(int x, int y) : Item(x, y) {
+	tExp = 8;
+	tIcon = 'R';
+}
+
 Replenish::Replenish(const Replenish& ref) { *this = ref; }
 
 void Replenish::update(Hero& hero) const {

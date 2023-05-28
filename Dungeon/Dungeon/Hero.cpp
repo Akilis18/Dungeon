@@ -1,7 +1,5 @@
 ﻿#include "Hero.h"
 
-#include "Game.h"
-
 // Default constructor
 Hero::Hero() {
 	this->sPos.x = 0;
@@ -126,6 +124,7 @@ void Hero::loseEXP(int points) {
 	}
 }
 
+// Calculate Gain of HP
 void Hero::gainHP(int points) {
 	hp = hp + points;
 	if (hp > 100) {
@@ -133,6 +132,7 @@ void Hero::gainHP(int points) {
 	}
 }
 
+// Calculate Loss of HP
 void Hero::damage(int points) {
 	hp = hp - points;
 	if (hp < 0) {
