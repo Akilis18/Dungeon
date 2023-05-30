@@ -12,7 +12,72 @@ void Game::mainFlow() {
 		gKeyState[i] = false;
 	}
 
-	while (true) {
+	system("cls");
+	cout << "Choose difficulty:" << endl
+		<< "	[1] Easy" << endl
+		<< "	[2] Medium" << endl
+		<< "	[3] Hard" << endl
+		<< "	[4] Load File" << endl;
+
+	char mode;
+	while (mode = _getch()) {
+		if (mode == '1') {
+			GWIDTH = 9;
+			GHEIGHT = 9;
+			for (int i = 0; i < 3; i++) {
+				gCreatures.push_back(new Bug());
+			}
+			gItems.push_back(new Replenish());
+			gItems.push_back(new Trigger());
+			break;
+		}
+		else if (mode == '2') {
+			GWIDTH = 13;
+			GHEIGHT = 13;
+			for (int i = 0; i < 3; i++) {
+				gCreatures.push_back(new Bug());
+			}
+			for (int i = 0; i < 2; i++) {
+				gCreatures.push_back(new Creature());
+			}
+			gItems.push_back(new Trigger());
+			gItems.push_back(new Replenish());
+			gItems.push_back(new Snare());
+			break;
+		}
+		else if (mode == '3') {
+			GWIDTH = 17;
+			GHEIGHT = 17;
+			for (int i = 0; i < 4; i++) {
+				gCreatures.push_back(new Bug());
+			}
+			for (int i = 0; i < 3; i++) {
+				gCreatures.push_back(new Creature());
+			}
+			for (int i = 0; i < 2; i++) {
+				gItems.push_back(new Trigger());
+				gItems.push_back(new Replenish());
+				gItems.push_back(new Snare());
+			}
+			break;
+		}
+		else if (mode == '4') {
+			loadMap();
+			break;
+		}
+		else {
+			system("cls");
+			cout << mode << " is not available" << endl;
+
+			cout << "Choose difficulty:" << endl
+				<< "	[1] Easy" << endl
+				<< "	[2] Medium" << endl
+				<< "	[3] Hard" << endl
+				<< "	[4] Load File" << endl;
+		}
+	}
+
+	/*while (true) {
 		std::cout << "Enter Width: ";
 		std::cin >> GWIDTH;
 		std::cout << "Enter Height: ";
@@ -24,7 +89,9 @@ void Game::mainFlow() {
 		else {
 			break;
 		}
-	}
+	}*/
+
+	system("cls");
 
 	// Setup a clear dungeon
 	setupBoard(GHEIGHT, GWIDTH);

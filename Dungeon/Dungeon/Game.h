@@ -94,11 +94,11 @@ private:
 
 	Hero gHero;
 
-	//Creature gCreature;
-	vector<Creature*> gCreatures = { new Creature(), new Bug() };
+	//vector<Creature*> gCreatures = { new Creature(), new Bug() };
+	vector<Creature*> gCreatures;
 
-	//vector<Trigger*> gTriggers;
-	vector<Item*> gItems = { new Trigger(), new Snare(), new Replenish() };
+	//vector<Item*> gItems = { new Trigger(), new Snare(), new Replenish() };
+	vector<Item*> gItems;
 
 	//Enumerate different key state
 	enum ValidInput {
