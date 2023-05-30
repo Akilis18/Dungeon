@@ -17,7 +17,8 @@ void Game::mainFlow() {
 		<< "	[1] Easy" << endl
 		<< "	[2] Medium" << endl
 		<< "	[3] Hard" << endl
-		<< "	[4] Load File" << endl;
+		<< "	[4] Load File" << endl
+		<< "	[esc] Exit" << endl;
 
 	char mode;
 	while (mode = _getch()) {
@@ -64,6 +65,9 @@ void Game::mainFlow() {
 		else if (mode == '4') {
 			loadMap();
 			break;
+		}
+		else if (mode == 27) {
+			exit(0);
 		}
 		else {
 			system("cls");
