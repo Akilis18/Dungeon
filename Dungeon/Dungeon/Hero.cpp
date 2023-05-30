@@ -74,15 +74,23 @@ void Hero::move(Position delta, char** board) {
 	// Compute the next position
 	Position next = this->sPos + delta;
 
-	/*if (next.isPositionValid(next, NULL))
-		this->sPos = next;*/
+	try {
+		if (!next.isPositionValid(board)) {
+			throw std::runtime_error("Invalid location");
+		}
 
-	if (next.isPositionValid(board)) {
+		this->sPos = next;
+	}
+	catch (const std::exception& e) {
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	/*if (next.isPositionValid(board)) {
 		this->sPos = next;
 	}
 	else {
 		std::cout << "Invalid location\n";
-	}
+	}*/
 }
 
 // Calculate Gain of EXP

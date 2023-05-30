@@ -7,6 +7,7 @@
 #include <algorithm>	// for max and min function
 #include <vector>
 #include <fstream>
+#include <stdexcept>
 
 //include our header files
 //#include "Board.h"

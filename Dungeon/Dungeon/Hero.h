@@ -1,7 +1,11 @@
 ﻿#pragma once
+#include <iostream>
 #include <string>
+#include <stdexcept>
 
 #include "Position.h"
+
+using namespace std;
 
 //************************************************************
 // A Hero class

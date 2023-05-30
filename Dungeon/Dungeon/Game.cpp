@@ -54,12 +54,28 @@ void Game::mainFlow() {
 		endT = clock();
 
 		if (gKeyState[ValidInput::ESave]) {
-			saveMap();
+			try {
+				saveMap();
+			}
+			catch (const exception& e) {
+				cerr << "Cannot Save Map" << endl;
+			}
 			gKeyState[ValidInput::ESave] = false;
+
+			/*saveMap();
+			gKeyState[ValidInput::ESave] = false;*/
 		}
 		else if (gKeyState[ValidInput::ELoad]) {
-			loadMap();
+			try {
+				loadMap();
+			}
+			catch (const exception& e) {
+				cerr << "Cannot Load File" << endl;
+			}
 			gKeyState[ValidInput::ELoad] = false;
+
+			/*loadMap();
+			gKeyState[ValidInput::ELoad] = false;*/
 		}
 	}
 }
@@ -106,60 +122,70 @@ void Game::keyUpdate(bool key[]) {
 //Pre: key array
 //Post: Update all characters' states
 void Game::update(bool key[]) {
-	// Clear Screen
-	system("CLS");
+	try {
+		// Clear Screen
+		system("CLS");
 
-	Position delta;
+		Position delta;
 
-	// Check Input State
-	bool hasInput = false;
-	if (key[ValidInput::EW]) {
-		delta -= Position(0, 1);
-		hasInput = true;
-	}
-	else if (key[ValidInput::ES]) {
-		delta += Position(0, 1);
-		hasInput = true;
-	}
-	else if (key[ValidInput::EA]) {
-		delta = delta - Position(1, 0);
-		hasInput = true;
-	}
-	else if (key[ValidInput::ED]) {
-		delta = delta + Position(1, 0);
-		hasInput = true;
-	}
-	else {
-		bool allInvalid = true;
-		for (int i = 0; i < ValidInput::INVALID; i++) {
-			if (key[i]) {
-				allInvalid = false;
-				break;
+		// Check Input State
+		bool hasInput = false;
+		if (key[ValidInput::EW]) {
+			delta -= Position(0, 1);
+			hasInput = true;
+		}
+		else if (key[ValidInput::ES]) {
+			delta += Position(0, 1);
+			hasInput = true;
+		}
+		else if (key[ValidInput::EA]) {
+			delta = delta - Position(1, 0);
+			hasInput = true;
+		}
+		else if (key[ValidInput::ED]) {
+			delta = delta + Position(1, 0);
+			hasInput = true;
+		}
+		else {
+			bool allInvalid = true;
+			for (int i = 0; i < ValidInput::INVALID; i++) {
+				if (key[i]) {
+					allInvalid = false;
+					break;
+				}
+			}
+
+			//Exception Handling
+			if (allInvalid) {
+				throw invalid_argument("Invalid Input");
+
+				/*std::cout << "invalid input\n";*/
 			}
 		}
-		if (allInvalid) {
-			std::cout << "invalid input\n";
+
+		if (hasInput) {
+			gHero.move(delta, gBoard);
 		}
+
+		// Manipulate update of two items using while loop
+		for (int i = 0; i < gItems.size(); i++) {
+			gItems[i]->update(gHero);
+		}
+
+		for (int i = 0; i < gCreatures.size(); i++) {
+			gCreatures[i]->update(gHero, gBoard);
+		}
+
+		/*draw();
+		drawInfo();*/
 	}
-
-
-	if (hasInput) {
-		gHero.move(delta, gBoard);
-	}
-
-	// Manipulate update of two items using while loop
-	for (int i = 0; i < gItems.size(); i++) {
-		gItems[i]->update(gHero);
-	}
-
-	for (int i = 0; i < gCreatures.size(); i++) {
-		gCreatures[i]->update(gHero, gBoard);
+	catch (const exception& e) {
+		cout << "Exception: " << e.what() << endl;
 	}
 
 	draw();
 	drawInfo();
 }
-
 
 //Intent: wall generation
 //Pre: board, starting position, board width & height
@@ -322,6 +348,12 @@ void Game::saveMap() {
 		return;
 
 	std::ofstream oStream(input + ".txt");
+
+	//Exception handling
+	if (!oStream.is_open()) {
+		throw runtime_error("Failed to open the output file.");
+	}
+
 	oStream << GWIDTH << " " << GHEIGHT << std::endl;
 
 	for (int i = 0; i < GHEIGHT; i++) {
@@ -362,8 +394,13 @@ void Game::loadMap() {
 		return;
 
 	std::ifstream iStream(input + ".txt");
-	if (!iStream.is_open())
-		return;
+
+	//Exception Handling
+	if (!iStream.is_open()) {
+		throw std::runtime_error("Failed to open the input file.");
+	}
+	//if (!iStream.is_open())
+	//	return;
 
 	// reset dungen
 	for (int i = 0; i < GHEIGHT; i++) {
